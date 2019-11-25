@@ -68,32 +68,22 @@ namespace SabaVEE1
             }
 
             List<object> PreFinalReadOutList = ReadOutList;
-
+            // this is our final readout list after reducing the main list and what remains is ordered list just by one reaout data in every month
             List<object> FinalReadOutList = new List<object>();
 
             FinalReadOutList.Add(PreFinalReadOutList.LastOrDefault<object>());
-          
+
+            DateTime tempTime = new DateTime();
+
+            var ctt = new CreateTempTime();
+
             foreach (object[] element in PreFinalReadOutList)
             {
-                if(element[0] != null)
+                if (element[0] != null)
                 {
-                    char[] separator = { '/', '/', ' ' };
+                    DateTime convertedDate = shamsiDate.DateConvertor(element);
 
-                    var rd = element[0].ToString();
-                    String[] strlist = rd.Split(separator, 4);
-
-                    year = Int32.Parse(strlist[0]);
-                    month = Int32.Parse(strlist[1]);
-                    day = Int32.Parse(strlist[2]);
-
-                    DateTime convertedDate = shamsiDate.DateConvertor(1398, 07, 09);
-
-                    object lastInList = FinalReadOutList.LastOrDefault();
-
-                    if (convertedDate < shamsiDate.DateConvertor(year, month + 1, 20) && convertedDate < shamsiDate.DateConvertor(year, month, 20) )//&& convertedDate > lastInList.)
-                    {
-                        string hello = "sjkjsd";
-                    }
+                    tempTime = ctt.CreateTime(convertedDate);
                 }
             }
 

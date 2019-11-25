@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aaa.cs" />
+    <Compile Include="CreateTempTime.cs" />
     <Compile Include="Shamsi_to_Miladi_convertorDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
