@@ -21,9 +21,6 @@ namespace SabaVEE1
             string sql = null;
             string data = null;
             
-            int year = 0;
-            int month = 0;
-            int day = 0;
             int i = 0;
             int j = 0;
             
@@ -36,8 +33,6 @@ namespace SabaVEE1
             Excel.Worksheet xlWorkSheet;
             object misValue = System.Reflection.Missing.Value;
 
-            
-
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
@@ -46,7 +41,7 @@ namespace SabaVEE1
 
             cnn = new SqlConnection(connectionString);
             cnn.Open();
-            sql = "select distinct ReadDate,TransferDate,obis,Value,ObisFarsiDesc from Meter inner join OBISValueHeader on meter.MeterID = OBISValueHeader.MeterID inner join OBISValueDetail on OBISValueDetail.OBISValueHeaderID = OBISValueHeader.OBISValueHeaderID inner join OBISS on obiss.OBISID = OBISValueDetail.OBISID where Meter.MeterNumber = '1939400024957' and Value != '0'and(Obiss.OBISID = 83 or ObisFarsiDesc like '%آب مصرفي کل%' or Obiss.OBISID = 88 or ObisFarsiDesc like '%ساعت%') order by ReadDate,OBISS.Obis";
+            sql = "select distinct ReadDate,TransferDate,obis,Value,ObisFarsiDesc from Meter inner join OBISValueHeader on meter.MeterID = OBISValueHeader.MeterID inner join OBISValueDetail on OBISValueDetail.OBISValueHeaderID = OBISValueHeader.OBISValueHeaderID inner join OBISS on obiss.OBISID = OBISValueDetail.OBISID where Meter.MeterNumber = '1949400024668' and Value != '0'and(Obiss.OBISID = 83 or ObisFarsiDesc like '%آب مصرفي کل%' or Obiss.OBISID = 88 or ObisFarsiDesc like '%ساعت%') order by ReadDate,OBISS.Obis";
 
             SqlDataAdapter dscmd = new SqlDataAdapter(sql, cnn);
             DataSet ds = new DataSet();
@@ -54,10 +49,10 @@ namespace SabaVEE1
 
             List<object> ReadOutList = new List<object>();
             
-
+            // Create PreFinalReadOutList
             for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
             {
-                object[] dataEntryArray = new object[5];
+                object[] dataEntryArray = new object[6];
 
                 for (j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
                 {
@@ -69,11 +64,11 @@ namespace SabaVEE1
             }
 
             List<object> PreFinalReadOutList = ReadOutList;
+
             // this is our final readout list after reducing the main list and what remains is ordered list just by one reaout data in every month
             List<object> FinalReadOutList = new List<object>();
 
             DateTime tempTime1 = new DateTime();
-
             DateTime temptime2 = new DateTime();
 
             var ctt = new CreateTempTime();
@@ -102,11 +97,42 @@ namespace SabaVEE1
                     }
                 }
             }
+            //Create Excell Before omitting other extra information
+            //int ii = 1;
+            //foreach (object[] obj in FinalReadOutList)
+            //{
+            //    int jj = 1;
+            //    foreach (object drv in obj)
+            //    {
+            //        xlWorkSheet.Cells[ii, jj] = drv;
+            //        jj++;
+            //    }
+            //    ii++;
+            //}
+
+            // Create Ordered ReadOutList
+            List<object> FinalOrderedReadOutList = new List<object>();
+
+            foreach (object[] element in FinalReadOutList)
+            {
+                if (element[2] != null && element[2].ToString().Contains("802010000"))
+                {
+                    FinalOrderedReadOutList.Add(element);
+                }
+
+                if (element[2] != null && element[2].ToString().Contains("802606202"))
+                {
+                    FinalOrderedReadOutList.Add(element);
+                }
+            }
+
+            List<object> ReadOutList1 = new List<object>();
+            List<object> ReadOutList2 = new List<object>();
+
+
 
             int ii = 1;
-            
-
-            foreach (object[] obj in FinalReadOutList)
+            foreach (object[] obj in FinalOrderedReadOutList)
             {
                 int jj = 1;
                 foreach (object drv in obj)
@@ -116,6 +142,9 @@ namespace SabaVEE1
                 }
                 ii++;
             }
+
+
+
 
             xlWorkBook.SaveAs(@"D:\Excellproject.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);                   
