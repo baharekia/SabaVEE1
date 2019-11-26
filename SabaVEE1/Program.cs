@@ -121,6 +121,8 @@ namespace SabaVEE1
             object[] asb = (object[])FinalReadOutList.FirstOrDefault();
             cmdate = (DateTime)asb[0];
 
+            int temp = 12;
+
             foreach (object[] element in FinalReadOutList)
             {
                 if (cmdate != (DateTime)element[0])
@@ -128,15 +130,14 @@ namespace SabaVEE1
                     cmdate = (DateTime)element[0];
                     m = 0;
                 }
-                int temp =12; 
-                 
+
                 if (element[2] != null && element[2].ToString().Contains("802010000") && element[2].ToString()!= ("0802010000FF"))
                 {
                     DateTime d = (DateTime)element[0];
                     
                     if (d.Day > 20 && d.Day <= 31)
                     {
-                        if (temp < 1)
+                        if (temp < 2)
                         {
                             element[5] = (d.Year-1).ToString() + "." + (d.Month - m).ToString();
                             temp = (d.Month) - m;
@@ -149,7 +150,7 @@ namespace SabaVEE1
                     }
                     else
                     {
-                        if(temp < 1)
+                        if(temp < 2)
                         {
                             temp = d.Month - m;
                             element[5] = d.Year.ToString() + "." + (d.Month - 1 - m).ToString();
