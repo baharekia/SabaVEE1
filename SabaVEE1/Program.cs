@@ -36,7 +36,7 @@ namespace SabaVEE1
             Excel.Worksheet xlWorkSheet;
             object misValue = System.Reflection.Missing.Value;
 
-            List<object> ReadOutList = new List<object>();
+            
 
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Add(misValue);
@@ -52,8 +52,7 @@ namespace SabaVEE1
             DataSet ds = new DataSet();
             dscmd.Fill(ds);
 
-            List<object> dataEntryList = new List<object>();
-
+            List<object> ReadOutList = new List<object>();
             object[] dataEntryArray = new object[5];
 
             for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
@@ -71,9 +70,9 @@ namespace SabaVEE1
             // this is our final readout list after reducing the main list and what remains is ordered list just by one reaout data in every month
             List<object> FinalReadOutList = new List<object>();
 
-            FinalReadOutList.Add(PreFinalReadOutList.LastOrDefault<object>());
+            DateTime tempTime1 = new DateTime();
 
-            DateTime tempTime = new DateTime();
+            DateTime temptime2 = new DateTime();
 
             var ctt = new CreateTempTime();
 
@@ -83,11 +82,30 @@ namespace SabaVEE1
                 {
                     DateTime convertedDate = shamsiDate.DateConvertor(element);
 
-                    tempTime = ctt.CreateTime(convertedDate);
+                    tempTime1 = ctt.CreateTime(convertedDate);
+
+                    if(temptime2 != tempTime1)
+                    {
+                        temptime2 = tempTime1;
+                        FinalReadOutList.Add(element);
+                    }
                 }
             }
 
-            xlWorkBook.SaveAs(@"C:\Users\Bagherkia.Bahareh\Desktop\Bagheri kia\Excellproject10.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            int ii = 1;
+            int jj = 1;
+
+            foreach (object[] obj in FinalReadOutList)
+            {
+                foreach (object drv in obj)
+                {
+                    xlWorkSheet.Cells[ii, jj] = obj[ii];
+                    j++;
+                }
+                i++;
+            }
+
+            xlWorkBook.SaveAs(@"C:\Users\Bagherkia.Bahareh\Desktop\Bagheri kia\Excellproject11.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);                   
             xlApp.Quit();
 

@@ -22,10 +22,12 @@ namespace SabaVEE1
                     ty = convertedDate.Year - 1;
                     tm = 12;
                 }
-                else
-                {
-                    tm = convertedDate.Month;
-                }
+            }
+
+            else
+            {
+                tm = convertedDate.Month;
+                ty = convertedDate.Year;
             }
             return new DateTime(ty, tm, 19, 23, 59, 59);
         }
