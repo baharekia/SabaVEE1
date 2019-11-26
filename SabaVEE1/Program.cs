@@ -104,10 +104,11 @@ namespace SabaVEE1
             }
 
             int ii = 1;
-            int jj = 1;
+            
 
             foreach (object[] obj in FinalReadOutList)
             {
+                int jj = 1;
                 foreach (object drv in obj)
                 {
                     xlWorkSheet.Cells[ii, jj] = drv;
