@@ -53,10 +53,12 @@ namespace SabaVEE1
             dscmd.Fill(ds);
 
             List<object> ReadOutList = new List<object>();
-            object[] dataEntryArray = new object[5];
+            
 
             for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
             {
+                object[] dataEntryArray = new object[5];
+
                 for (j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
                 {
                     data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
@@ -75,6 +77,7 @@ namespace SabaVEE1
             DateTime temptime2 = new DateTime();
 
             var ctt = new CreateTempTime();
+            DateTime lastReadOutDate = new DateTime();
 
             foreach (object[] element in PreFinalReadOutList)
             {
@@ -84,10 +87,18 @@ namespace SabaVEE1
 
                     tempTime1 = ctt.CreateTime(convertedDate);
 
+                    if(tempTime1 == temptime2 && lastReadOutDate == convertedDate)
+                    {
+                        element[0] = convertedDate;
+                        FinalReadOutList.Add(element);
+                    }
+
                     if(temptime2 != tempTime1)
                     {
                         temptime2 = tempTime1;
+                        element[0] = convertedDate;
                         FinalReadOutList.Add(element);
+                        lastReadOutDate = convertedDate;
                     }
                 }
             }
@@ -99,10 +110,10 @@ namespace SabaVEE1
             {
                 foreach (object drv in obj)
                 {
-                    xlWorkSheet.Cells[ii, jj] = obj[ii];
-                    j++;
+                    xlWorkSheet.Cells[ii, jj] = drv;
+                    jj++;
                 }
-                i++;
+                ii++;
             }
 
             xlWorkBook.SaveAs(@"C:\Users\Bagherkia.Bahareh\Desktop\Bagheri kia\Excellproject11.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
