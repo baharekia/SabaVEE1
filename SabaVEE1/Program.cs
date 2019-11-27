@@ -99,19 +99,6 @@ namespace SabaVEE1
                 }
             }
 
-            //Create Excell Before omitting other extra information
-            //int ii = 1;
-            //foreach (object[] obj in FinalReadOutList)
-            //{
-            //    int jj = 1;
-            //    foreach (object drv in obj)
-            //    {
-            //        xlWorkSheet.Cells[ii, jj] = drv;
-            //        jj++;
-            //    }
-            //    ii++;
-            //}
-
             // Create Ordered ReadOutList
             List<object> FinalOrderedReadOutList = new List<object>();
             int m = 0;
@@ -121,47 +108,57 @@ namespace SabaVEE1
             object[] asb = (object[])FinalReadOutList.FirstOrDefault();
             cmdate = (DateTime)asb[0];
 
-            int temp = 12;
+            int tm = 0;
+            int ym = 0;
+            int dm = 0;
 
             foreach (object[] element in FinalReadOutList)
             {
                 if (cmdate != (DateTime)element[0])
                 {
+                    DateTime d = (DateTime)element[0];
+
+                    tm = d.Month;
+                    ym = d.Year;
+                    dm = d.Day;
                     cmdate = (DateTime)element[0];
                     m = 0;
                 }
 
                 if (element[2] != null && element[2].ToString().Contains("802010000") && element[2].ToString()!= ("0802010000FF"))
                 {
-                    DateTime d = (DateTime)element[0];
-                    
-                    if (d.Day > 20 && d.Day <= 31)
+                    if (dm > 20 && dm <= 31)
                     {
-                        if (temp < 2)
+                        if (tm < 1)
                         {
-                            element[5] = (d.Year-1).ToString() + "." + (d.Month - m).ToString();
-                            temp = (d.Month) - m;
+                            tm = 12;
+                            ym = ym - 1;
+                            element[5] = ym.ToString() + "." + tm.ToString();
+                            tm = tm - 1;
                         }
                         else
                         {
-                            element[5] = d.Year.ToString() + "." + (d.Month - m).ToString();
-                            temp = (d.Month) - m;
+                            element[5] = ym.ToString() + "." + tm.ToString();
+                            tm = tm - 1;
                         }
                     }
+
                     else
                     {
-                        if(temp < 2)
+                        tm = tm - 1;
+                        if (tm < 1)
                         {
-                            temp = d.Month - m;
-                            element[5] = d.Year.ToString() + "." + (d.Month - 1 - m).ToString();
+                            tm = 12;
+                            ym = ym - 1;
+                            element[5] = ym.ToString() + "." + (tm).ToString();
+
                         }
                         else
                         {
-                            temp = d.Month - m;
-                            element[5] = d.Year.ToString() + "." + (d.Month - 1 - m).ToString();
+                            element[5] = ym.ToString() + "." + (tm).ToString();
                         }
                     }
-                        
+
                     m++;
                     FinalOrderedReadOutList.Add(element);
                 }
@@ -172,62 +169,9 @@ namespace SabaVEE1
                 }
             }
 
-            //DateTime cmdate = new DateTime();
-
-            //object[] asb = (object[])FinalOrderedReadOutList.FirstOrDefault();
-            //cmdate = (DateTime)asb[0];
-            //int n = 0;
-            //List<object> FinalOrderedReadOutList1 = new List<object>();
-
-            //foreach (object[] element in FinalOrderedReadOutList)
-            //{
-            //    if (cmdate == (DateTime)element[0])
-            //    {
-            //        if (element[2] != null && element[2].ToString().Contains("802010000") && element[2].ToString() != ("0802010000FF"))
-            //        {
-            //            DateTime d = (DateTime)element[0];
-            //            if (d.Day > 20 && d.Day <= 31)
-            //            {
-            //                element[5] = d.Year.ToString() + "." + (d.Month - n).ToString();
-            //            }
-            //            else
-            //            {
-            //                element[5] = d.Year.ToString() + "." + (d.Month - 1 - n).ToString();
-            //            }
-            //            n++;
-            //            FinalOrderedReadOutList1.Add(element);
-            //        }
-            //        else
-            //        {
-            //            n = 0;
-            //            if (element[2] != null && element[2].ToString().Contains("802010000") && element[2].ToString() != ("0802010000FF"))
-            //            {
-            //                DateTime d = (DateTime)element[0];
-            //                if (d.Day > 20 && d.Day <= 31)
-            //                {
-            //                    element[5] = d.Year.ToString() + "." + (d.Month - n).ToString();
-            //                }
-            //                else
-            //                {
-            //                    element[5] = d.Year.ToString() + "." + (d.Month - 1 - n).ToString();
-            //                }
-            //                n++;
-            //                FinalOrderedReadOutList1.Add(element);
-            //            }
-            //        }
-            //    }
-
-            //    if (element[2] != null && element[2].ToString().Contains("802606202"))
-            //    {
-            //        FinalOrderedReadOutList1.Add(element);
-            //    }
-            //}
-
-
             List<object> ReadOutList1 = new List<object>();
             List<object> ReadOutList2 = new List<object>();
 
-            
             int ii = 1;
             foreach (object[] obj in FinalOrderedReadOutList)
             {
@@ -239,9 +183,6 @@ namespace SabaVEE1
                 }
                 ii++;
             }
-
-
-
 
             xlWorkBook.SaveAs(@"D:\Excellproject.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);                   
