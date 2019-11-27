@@ -63,10 +63,7 @@ namespace SabaVEE1
                 ReadOutList.Add(dataEntryArray);
             }
 
-            List<object> PreFinalReadOutList = ReadOutList;
-
-            // this is our final readout list after reducing the main list and what remains is ordered list just by one reaout data in every month
-            List<object> FinalReadOutList = new List<object>();
+            List<AnalysisDataModel> FinalReadOutList = new List<AnalysisDataModel>();
 
             DateTime tempTime1 = new DateTime();
             DateTime temptime2 = new DateTime();
@@ -74,58 +71,70 @@ namespace SabaVEE1
             var ctt = new CreateTempTime();
             DateTime lastReadOutDate = new DateTime();
 
-            foreach (object[] element in PreFinalReadOutList)
+            foreach (object[] element in ReadOutList)
             {
                 if (element[0] != null)
                 {
                     DateTime convertedDate = shamsiDate.DateConvertor(element);
+                    AnalysisDataModel analysisData = new AnalysisDataModel();
 
                     tempTime1 = ctt.CreateTime(convertedDate);
 
                     if(tempTime1 == temptime2 && lastReadOutDate == convertedDate)
                     {
                         element[0] = convertedDate;
-                        
-                        FinalReadOutList.Add(element);
+                        analysisData= new AnalysisDataModel((DateTime)element[0],
+                            element[1].ToString(),
+                            element[2].ToString(),
+                            element[3].ToString(), 
+                            element[4].ToString(), 
+                            "");
+                        FinalReadOutList.Add(analysisData);
                     }
 
                     if(temptime2 != tempTime1)
                     {
                         temptime2 = tempTime1;
                         element[0] = convertedDate;
-                        FinalReadOutList.Add(element);
+                        analysisData = new AnalysisDataModel((DateTime)element[0],
+                            element[1].ToString(),
+                            element[2].ToString(),
+                            element[3].ToString(),
+                            element[4].ToString(),
+                            "");
+                        FinalReadOutList.Add(analysisData);
                         lastReadOutDate = convertedDate;
                     }
                 }
             }
 
             // Create Ordered ReadOutList
-            List<object> FinalOrderedReadOutList = new List<object>();
+            List<AnalysisDataModel> FinalOrderedReadOutList = new List<AnalysisDataModel>();
             int m = 0;
 
             DateTime cmdate = new DateTime();
 
-            object[] asb = (object[])FinalReadOutList.FirstOrDefault();
-            cmdate = (DateTime)asb[0];
+            AnalysisDataModel asb = FinalReadOutList.FirstOrDefault();
+            cmdate = asb.ReadOutDate;
 
             int tm = 0;
             int ym = 0;
             int dm = 0;
 
-            foreach (object[] element in FinalReadOutList)
+            foreach (AnalysisDataModel element in FinalReadOutList)
             {
-                if (cmdate != (DateTime)element[0])
+                if (cmdate != element.ReadOutDate)
                 {
-                    DateTime d = (DateTime)element[0];
+                    DateTime d = element.ReadOutDate;
 
                     tm = d.Month;
                     ym = d.Year;
                     dm = d.Day;
-                    cmdate = (DateTime)element[0];
+                    cmdate = element.ReadOutDate;
                     m = 0;
                 }
 
-                if (element[2] != null && element[2].ToString().Contains("802010000") && element[2].ToString()!= ("0802010000FF"))
+                if (element.Obis != null && element.Obis.Contains("802010000") && element.Obis!= ("0802010000FF"))
                 {
                     if (dm > 20 && dm <= 31)
                     {
@@ -133,12 +142,12 @@ namespace SabaVEE1
                         {
                             tm = 12;
                             ym = ym - 1;
-                            element[5] = ym.ToString() + "." + tm.ToString();
+                            element.Date = ym.ToString() + "." + tm.ToString();
                             tm = tm - 1;
                         }
                         else
                         {
-                            element[5] = ym.ToString() + "." + tm.ToString();
+                            element.Date = ym.ToString() + "." + tm.ToString();
                             tm = tm - 1;
                         }
                     }
@@ -150,12 +159,12 @@ namespace SabaVEE1
                         {
                             tm = 12;
                             ym = ym - 1;
-                            element[5] = ym.ToString() + "." + (tm).ToString();
+                            element.Date = ym.ToString() + "." + (tm).ToString();
 
                         }
                         else
                         {
-                            element[5] = ym.ToString() + "." + (tm).ToString();
+                            element.Date = ym.ToString() + "." + (tm).ToString();
                         }
                     }
 
@@ -163,24 +172,37 @@ namespace SabaVEE1
                     FinalOrderedReadOutList.Add(element);
                 }
 
-                if (element[2] != null && element[2].ToString().Contains("802606202"))
-                {
-                    FinalOrderedReadOutList.Add(element);
-                }
+                //Not consider SatKarkard
+                //if (element[2] != null && element[2].ToString().Contains("802606202"))
+                //{
+                //    FinalOrderedReadOutList.Add(element);
+                //}
             }
 
             List<object> ReadOutList1 = new List<object>();
+
             List<object> ReadOutList2 = new List<object>();
 
+            DateTime oldReadOuteDate = new DateTime();
+
+            AnalysisDataModel mnl = FinalOrderedReadOutList.FirstOrDefault();
+            oldReadOuteDate = mnl.ReadOutDate;
+
+            object newItem = null;
+
+            //foreach (object[] element in FinalOrderedReadOutList)
+            //{
+            //    if (oldReadOuteDate[0] != element[0])
+            //    {
+            //        oldItem = element;
+            //    }
+            //}
+
+
             int ii = 1;
-            foreach (object[] obj in FinalOrderedReadOutList)
+            foreach (AnalysisDataModel obj in FinalOrderedReadOutList)
             {
-                int jj = 1;
-                foreach (object drv in obj)
-                {
-                    xlWorkSheet.Cells[ii, jj] = drv;
-                    jj++;
-                }
+                xlWorkSheet.Cells[ii] = obj;
                 ii++;
             }
 
