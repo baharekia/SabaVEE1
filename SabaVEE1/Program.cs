@@ -20,12 +20,12 @@ namespace SabaVEE1
             string connectionString = null;
             string sql = null;
             string data = null;
-            
+
             int i = 0;
             int j = 0;
-            
+
             DateTime date95 = new DateTime(1395, 01, 01);
-            
+
             var shamsiDate = new Shamsi_to_Miladi_convertorDate();
 
             Excel.Application xlApp;
@@ -36,6 +36,33 @@ namespace SabaVEE1
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"D:\ExcellprojectTemplate.xls");
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Excel.Range xlRange = xlWorksheet.UsedRange;
+
+            int rowCount = xlRange.Rows.Count;
+            int colCount = xlRange.Columns.Count;
+
+            //iterate over the rows and columns and print to the console as it appears in the file
+            //excel is not zero based!!
+
+            //List<Object[]> ReadOutList = new List<object[]>();
+
+            //for (int iii = 2; iii <= rowCount; iii++)
+            //{
+            //    object[] dataEntryArray = new object[6];
+
+            //    for (int jjj = 1; jjj <= colCount; jjj++)
+            //    {
+            //        data = xlRange.Cells[iii, jjj].Value2.ToString();
+            //        dataEntryArray[jjj] = data;
+            //    }
+
+            //    ReadOutList.Add(dataEntryArray);
+            //}
+
+
 
             connectionString = "Data Source=.;Initial Catalog=SabaCandH;User ID=sa;Password=88102351-7";
 
@@ -48,7 +75,7 @@ namespace SabaVEE1
             dscmd.Fill(ds);
 
             List<object> ReadOutList = new List<object>();
-            
+
             // Create PreFinalReadOutList
             for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
             {
@@ -57,7 +84,7 @@ namespace SabaVEE1
                 for (j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
                 {
                     data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
-                    
+
                     dataEntryArray[j] = data;
                 }
                 ReadOutList.Add(dataEntryArray);
@@ -80,19 +107,19 @@ namespace SabaVEE1
 
                     tempTime1 = ctt.CreateTime(convertedDate);
 
-                    if(tempTime1 == temptime2 && lastReadOutDate == convertedDate)
+                    if (tempTime1 == temptime2 && lastReadOutDate == convertedDate)
                     {
                         element[0] = convertedDate;
-                        analysisData= new AnalysisDataModel((DateTime)element[0],
+                        analysisData = new AnalysisDataModel((DateTime)element[0],
                             element[1].ToString(),
                             element[2].ToString(),
-                            element[3].ToString(), 
-                            element[4].ToString(), 
+                            element[3].ToString(),
+                            element[4].ToString(),
                             "");
                         FinalReadOutList.Add(analysisData);
                     }
 
-                    if(temptime2 != tempTime1)
+                    if (temptime2 != tempTime1)
                     {
                         temptime2 = tempTime1;
                         element[0] = convertedDate;
@@ -134,9 +161,9 @@ namespace SabaVEE1
                     m = 0;
                 }
 
-                if (element.Obis != null && element.Obis.Contains("802010000") && element.Obis!= ("0802010000FF"))
+                if (element.Obis != null && element.Obis.Contains("802010000") && element.Obis != ("0802010000FF"))
                 {
-                    if (dm > 20 && dm <= 31)
+                    if (dm >= 20 && dm <= 31)
                     {
                         if (tm < 1)
                         {
@@ -179,35 +206,67 @@ namespace SabaVEE1
                 //}
             }
 
-            List<object> ReadOutList1 = new List<object>();
+            List<AnalysisDataModel> ReadOutListOld = new List<AnalysisDataModel>();
+            List<AnalysisDataModel> ReadOutListNew = new List<AnalysisDataModel>();
 
-            List<object> ReadOutList2 = new List<object>();
+            AnalysisDataModel OldSampleData = FinalOrderedReadOutList.FirstOrDefault();
+            AnalysisDataModel NewSampleData = new AnalysisDataModel();
 
-            DateTime oldReadOuteDate = new DateTime();
+            AnalysisDataModel lastOldListData = new AnalysisDataModel();
+            AnalysisDataModel LastNewListData = new AnalysisDataModel();
+            int index = 1;
 
-            AnalysisDataModel mnl = FinalOrderedReadOutList.FirstOrDefault();
-            oldReadOuteDate = mnl.ReadOutDate;
-
-            object newItem = null;
-
-            //foreach (object[] element in FinalOrderedReadOutList)
-            //{
-            //    if (oldReadOuteDate[0] != element[0])
-            //    {
-            //        oldItem = element;
-            //    }
-            //}
-
-
-            int ii = 1;
-            foreach (AnalysisDataModel obj in FinalOrderedReadOutList)
+            foreach (AnalysisDataModel item in FinalOrderedReadOutList)
             {
-                xlWorkSheet.Cells[ii] = obj;
-                ii++;
+                if (item.ReadOutDate != OldSampleData.ReadOutDate)
+                {
+                    if (item.Date == OldSampleData.Date)
+                    {
+                        if (item.Value == OldSampleData.Value)
+                        {
+                            foreach (AnalysisDataModel itemm in FinalOrderedReadOutList)
+                            {
+                                if (item.ReadOutDate == itemm.ReadOutDate)
+                                {
+                                    if (index == 1)
+                                    {
+                                        OldSampleData = itemm;
+                                        index = 0;
+                                        ReadOutListNew.Clear();
+                                    }
+                                    ReadOutListNew.Add(itemm);
+                                }
+                            }
+                            index = 1;
+                        }
+                    }
+                }
+            }
+
+            // Add List to the excell file
+            int row = 2;
+            int column = 1;
+
+            xlWorkSheet.Cells[1, 1].Value = "ReadDate";
+            xlWorkSheet.Cells[1, 2].Value = "TransferDate";
+            xlWorkSheet.Cells[1, 3].Value = "Obis";
+            xlWorkSheet.Cells[1, 4].Value = "Value";
+            xlWorkSheet.Cells[1, 5].Value = "ObisFarciDesc";
+            xlWorkSheet.Cells[1, 6].Value = "Date";
+
+            foreach (AnalysisDataModel item in ReadOutListNew)
+            {
+                column = 1;
+                xlWorkSheet.Cells[row, column++].Value = item.ReadOutDate;
+                xlWorkSheet.Cells[row, column++].Value = item.TransferDate;
+                xlWorkSheet.Cells[row, column++].Value = item.Obis;
+                xlWorkSheet.Cells[row, column++].Value = item.Value;
+                xlWorkSheet.Cells[row, column++].Value = item.ObisFarciDesc;
+                xlWorkSheet.Cells[row++, column].Value = item.Date;
             }
 
             xlWorkBook.SaveAs(@"D:\Excellproject.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);                   
+            xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
 
             var a = new aaa();
