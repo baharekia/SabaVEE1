@@ -16,6 +16,7 @@ namespace SabaVEE1
     {
         static void Main(string[] args)
         {
+            #region prerequisite
             SqlConnection cnn;
             string connectionString = null;
             string sql = null;
@@ -44,26 +45,6 @@ namespace SabaVEE1
             int rowCount = xlRange.Rows.Count;
             int colCount = xlRange.Columns.Count;
 
-            //iterate over the rows and columns and print to the console as it appears in the file
-            //excel is not zero based!!
-
-            //List<Object[]> ReadOutList = new List<object[]>();
-
-            //for (int iii = 2; iii <= rowCount; iii++)
-            //{
-            //    object[] dataEntryArray = new object[6];
-
-            //    for (int jjj = 1; jjj <= colCount; jjj++)
-            //    {
-            //        data = xlRange.Cells[iii, jjj].Value2.ToString();
-            //        dataEntryArray[jjj] = data;
-            //    }
-
-            //    ReadOutList.Add(dataEntryArray);
-            //}
-
-
-
             connectionString = "Data Source=.;Initial Catalog=SabaCandH;User ID=sa;Password=88102351-7";
 
             cnn = new SqlConnection(connectionString);
@@ -75,8 +56,9 @@ namespace SabaVEE1
             dscmd.Fill(ds);
 
             List<object> ReadOutList = new List<object>();
+            #endregion
 
-            // Create PreFinalReadOutList
+            #region Create PreFinalReadOutList
             for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
             {
                 object[] dataEntryArray = new object[6];
@@ -89,7 +71,9 @@ namespace SabaVEE1
                 }
                 ReadOutList.Add(dataEntryArray);
             }
+            #endregion
 
+            #region Create FinalReadOutList
             List<AnalysisDataModel> FinalReadOutList = new List<AnalysisDataModel>();
 
             DateTime tempTime1 = new DateTime();
@@ -134,7 +118,10 @@ namespace SabaVEE1
                     }
                 }
             }
-            // Create Ordered ReadOutList
+
+            #endregion
+
+            #region Create Ordered FinalOrderedReadOutList
             List<AnalysisDataModel> FinalOrderedReadOutList = new List<AnalysisDataModel>();
             int m = 0;
 
@@ -204,17 +191,17 @@ namespace SabaVEE1
                 //    FinalOrderedReadOutList.Add(element);
                 //}
             }
+            #endregion
 
+            #region  Create FinalSortedList
             List<AnalysisDataModel> ReadOutListOld = new List<AnalysisDataModel>();
             List<AnalysisDataModel> ReadOutListNew = new List<AnalysisDataModel>();
 
             AnalysisDataModel OldSampleData = FinalOrderedReadOutList.FirstOrDefault();
-            AnalysisDataModel NewSampleData = new AnalysisDataModel();
 
-            AnalysisDataModel lastOldListData = new AnalysisDataModel();
-            AnalysisDataModel LastNewListData = new AnalysisDataModel();
             int index = 1;
 
+            
             foreach (AnalysisDataModel item in FinalOrderedReadOutList)
             {
                 if (item.ReadOutDate != OldSampleData.ReadOutDate)
@@ -241,8 +228,9 @@ namespace SabaVEE1
                     }
                 }
             }
+            #endregion
 
-            // Add List to the excell file
+            #region Add List to the excell file
             int row = 2;
             int column = 1;
 
@@ -262,8 +250,24 @@ namespace SabaVEE1
                 xlWorkSheet.Cells[row, column++].Value = item.Value;
                 xlWorkSheet.Cells[row, column++].Value = item.ObisFarciDesc;
                 xlWorkSheet.Cells[row++, column].Value = item.Date;
+                
             }
 
+            xlWorkSheet.Cells[row++, column].Value = "";
+            foreach (AnalysisDataModel item in FinalOrderedReadOutList)
+            {
+                column = 1;
+                xlWorkSheet.Cells[row, column++].Value = item.ReadOutDate;
+                xlWorkSheet.Cells[row, column++].Value = item.TransferDate;
+                xlWorkSheet.Cells[row, column++].Value = item.Obis;
+                xlWorkSheet.Cells[row, column++].Value = item.Value;
+                xlWorkSheet.Cells[row, column++].Value = item.ObisFarciDesc;
+                xlWorkSheet.Cells[row++, column].Value = item.Date;
+                
+            }
+            #endregion
+
+            #region Save Excell and close
             xlWorkBook.SaveAs(@"D:\Excellproject.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
@@ -272,6 +276,7 @@ namespace SabaVEE1
             a.releaseObject(xlWorkSheet);
             a.releaseObject(xlWorkBook);
             a.releaseObject(xlApp);
+            #endregion
 
         }
     }
