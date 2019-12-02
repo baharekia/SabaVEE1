@@ -22,6 +22,7 @@ namespace SabaVEE1
                     ty = convertedDate.Year - 1;
                     tm = 12;
                 }
+                ty = convertedDate.Year;
             }
 
             else
