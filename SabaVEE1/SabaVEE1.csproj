@@ -58,6 +58,7 @@
     <Compile Include="CreateTempTime.cs" />
     <Compile Include="GetReadOutDataFromSqlServer.cs" />
     <Compile Include="InsertToExcellFileForWaterConsumption.cs" />
+    <Compile Include="SeparateYearAndMonthFromDate.cs" />
     <Compile Include="Shamsi_to_Miladi_convertorDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

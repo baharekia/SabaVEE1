@@ -46,13 +46,22 @@ namespace SabaVEE1
                             ReadOutListNew.Reverse();
                             lastitem1 = ReadOutListNew.FirstOrDefault();
                             ReadOutListOld.Reverse();
+                            SeparateYearAndMonthFromDate separateYearAndMonthFromDate = new SeparateYearAndMonthFromDate();
+                            int[] LastItemYearMonthArray = separateYearAndMonthFromDate.SeparateYearAndMonthFromDateMethod(lastitem1);
 
                             foreach (AnalysisDataModel u in ReadOutListOld)
                             {
+                                int[] UYearMotnhArrayList = separateYearAndMonthFromDate.SeparateYearAndMonthFromDateMethod(u);
+
+                                if (UYearMotnhArrayList[0] == LastItemYearMonthArray[0] && UYearMotnhArrayList[1] > LastItemYearMonthArray[1])
+                                    break;
+
                                 if (lastitem1.Date == u.Date)
                                 {
                                     break;
                                 }
+                                
+                                
                                 if (lastitem1.Date != u.Date)
                                 {
                                     SampleLastItem.Add(u);
