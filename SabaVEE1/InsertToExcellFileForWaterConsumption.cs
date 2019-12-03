@@ -48,7 +48,6 @@ namespace SabaVEE1
                 xlWorkSheet.Cells[row, column++].Value = item.Value;
                 xlWorkSheet.Cells[row, column++].Value = item.ObisFarciDesc;
                 xlWorkSheet.Cells[row++, column].Value = item.Date;
-
             }
 
             xlWorkBook.SaveAs(@"D:\TotalWaterConsumptionAnalysis.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
