@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace SabaVEE1
 {
-
-    public class CreateFinalList
+        public class CreateFinalList
     {
         List<AnalysisDataModel> ReadOutListOld = new List<AnalysisDataModel>();
         List<AnalysisDataModel> ReadOutListNew = new List<AnalysisDataModel>();
