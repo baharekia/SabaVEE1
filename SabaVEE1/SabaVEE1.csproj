@@ -49,15 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aaa.cs" />
-    <Compile Include="AddModifiedDateColumnToReadOutList.cs" />
+    <Compile Include="AddModifiedDateColumnToReadOutListForWaterConsumption.cs" />
     <Compile Include="AnalysisDataModel.cs" />
-    <Compile Include="AddModifiedDateColumnToReadOutList1.cs" />
-    <Compile Include="InsertToExcellFile1.cs" />
+    <Compile Include="AddModifiedDateColumnToReadOutListForOperationHours.cs" />
+    <Compile Include="InsertToExcellFileForOperationHours.cs" />
     <Compile Include="CreateFinalList.cs" />
     <Compile Include="CreateNewListWithDataModel.cs" />
     <Compile Include="CreateTempTime.cs" />
     <Compile Include="GetReadOutDataFromSqlServer.cs" />
-    <Compile Include="InsertToExcellFile.cs" />
+    <Compile Include="InsertToExcellFileForWaterConsumption.cs" />
     <Compile Include="Shamsi_to_Miladi_convertorDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

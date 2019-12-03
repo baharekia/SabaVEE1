@@ -18,24 +18,26 @@ namespace SabaVEE1
         static void Main(string[] args)
         {
             #region Total Water Consumption 
+            string MeterNumber = "";
             List<object> ReadOutList = new List<object>();
             List<AnalysisDataModel> FinalReadOutList = new List<AnalysisDataModel>();
             List<AnalysisDataModel> FinalOrderedReadOutList = new List<AnalysisDataModel>();
             List<AnalysisDataModel> ReadOutListNew = new List<AnalysisDataModel>();
-
+            Console.WriteLine("Please Enter MeterNumber :");
+            MeterNumber = Console.ReadLine();
             GetReadOutDataFromSqlServer getReadOutDataFromSqlServer = new GetReadOutDataFromSqlServer();
-            ReadOutList = getReadOutDataFromSqlServer.GetReadOutDataFromSqlServerMethod();
+            ReadOutList = getReadOutDataFromSqlServer.GetReadOutDataFromSqlServerMethod(MeterNumber);
 
             CreateNewListWithDataModel createNewListWithDataModel = new CreateNewListWithDataModel();
             FinalReadOutList = createNewListWithDataModel.CreateNewListWithDataModelMethod(ReadOutList);
 
-            AddModifiedDateColumnToReadOutList addModifiedDateColumnToReadOutList = new AddModifiedDateColumnToReadOutList();
+            AddModifiedDateColumnToReadOutListForWaterConsumption addModifiedDateColumnToReadOutList = new AddModifiedDateColumnToReadOutListForWaterConsumption();
             FinalOrderedReadOutList = addModifiedDateColumnToReadOutList.AddModifiedDateColumnToReadOutListMethod(FinalReadOutList);
 
             CreateFinalList createFinalList = new CreateFinalList();
             ReadOutListNew = createFinalList.CreateFinalListMethod(FinalOrderedReadOutList);
 
-            InsertToExcellFile InsertToExcellFile = new InsertToExcellFile();
+            InsertToExcellFileForWaterConsumption InsertToExcellFile = new InsertToExcellFileForWaterConsumption();
             InsertToExcellFile.InsertToExcellFileMethod(ReadOutListNew, FinalOrderedReadOutList);
             #endregion
 
@@ -46,18 +48,18 @@ namespace SabaVEE1
             List<AnalysisDataModel> ReadOutListNeww = new List<AnalysisDataModel>();
 
             GetReadOutDataFromSqlServer getReadOutDataFromSqlServerr = new GetReadOutDataFromSqlServer();
-            ReadOutListt = getReadOutDataFromSqlServerr.GetReadOutDataFromSqlServerMethod();
+            ReadOutListt = getReadOutDataFromSqlServerr.GetReadOutDataFromSqlServerMethod(MeterNumber);
 
             CreateNewListWithDataModel createNewListWithDataModell = new CreateNewListWithDataModel();
             FinalReadOutListt = createNewListWithDataModell.CreateNewListWithDataModelMethod(ReadOutListt);
 
-            AddModifiedDateColumnToReadOutList1 addModifiedDateColumnToReadOutListt = new AddModifiedDateColumnToReadOutList1();
+            AddModifiedDateColumnToReadOutListForOperationHours addModifiedDateColumnToReadOutListt = new AddModifiedDateColumnToReadOutListForOperationHours();
             FinalOrderedReadOutListt = addModifiedDateColumnToReadOutListt.AddModifiedDateColumnToReadOutListMethod(FinalReadOutListt);
 
             CreateFinalList createFinalListt = new CreateFinalList();
             ReadOutListNeww = createFinalListt.CreateFinalListMethod(FinalOrderedReadOutListt);
 
-            InsertToExcellFile1 InsertToExcellFilee = new InsertToExcellFile1();
+            InsertToExcellFileForOperationHours InsertToExcellFilee = new InsertToExcellFileForOperationHours();
             InsertToExcellFilee.InsertToExcellFileMethod(ReadOutListNeww, FinalOrderedReadOutListt);
             #endregion
         }

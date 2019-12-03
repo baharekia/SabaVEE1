@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SabaVEE1
 {
-    public class AddModifiedDateColumnToReadOutList1
+    public class AddModifiedDateColumnToReadOutListForOperationHours
     {
         List<AnalysisDataModel> FinalOrderedReadOutList = new List<AnalysisDataModel>();
         public List<AnalysisDataModel> AddModifiedDateColumnToReadOutListMethod(List<AnalysisDataModel> FinalReadOutList)

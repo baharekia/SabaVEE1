@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SabaVEE1
 {
-    public class InsertToExcellFile1
+    public class InsertToExcellFileForWaterConsumption
     {
         Excel.Application xlApp;
         Excel.Workbook xlWorkBook;
         Excel.Worksheet xlWorkSheet;
         object misValue = System.Reflection.Missing.Value;
 
-        public void InsertToExcellFileMethod(List<AnalysisDataModel> ReadOutListNew, List<AnalysisDataModel> FinalOrderedReadOutList)
+        public void InsertToExcellFileMethod(List<AnalysisDataModel> ReadOutListNew,List<AnalysisDataModel> FinalOrderedReadOutList)
         {
             int row = 2;
             int column = 1;
@@ -51,8 +51,7 @@ namespace SabaVEE1
 
             }
 
-
-            xlWorkBook.SaveAs(@"D:\Excellproject1.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.SaveAs(@"D:\TotalWaterConsumptionAnalysis.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
 
@@ -60,7 +59,7 @@ namespace SabaVEE1
             a.releaseObject(xlWorkSheet);
             a.releaseObject(xlWorkBook);
             a.releaseObject(xlApp);
-
+         
         }
     }
 }
