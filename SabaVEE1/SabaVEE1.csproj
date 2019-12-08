@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,13 +36,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,25 +63,503 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aaa.cs" />
+    <Compile Include="AccessUserToMeter.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
     <Compile Include="AddModifiedDateColumnToReadOutListForWaterConsumption.cs" />
     <Compile Include="AnalysisDataModel.cs" />
     <Compile Include="AddModifiedDateColumnToReadOutListForOperationHours.cs" />
+    <Compile Include="Area.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blog.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Button.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonAccess.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Card.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CardToMeter.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Catchment.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeDB.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsumedActiveEnergy.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsumedMaxDemand.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsumedWater.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreateTokenByDongle.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Credit303.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Curve.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DangelInfo.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBasesInfo.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceModel.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceType.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EOffice.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Error.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESubOffice.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FixedOBI.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Group.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupsMeter.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupToProvince.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HashToGroup.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
     <Compile Include="InsertToExcellFileForOperationHours.cs" />
     <Compile Include="CreateFinalList.cs" />
     <Compile Include="CreateNewListWithDataModel.cs" />
     <Compile Include="CreateTempTime.cs" />
     <Compile Include="GetReadOutDataFromSqlServer.cs" />
     <Compile Include="InsertToExcellFileForWaterConsumption.cs" />
+    <Compile Include="Language.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaxReadDateView.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MessageText.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Meter.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterError.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterErrorView.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterToCustomer.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeterToGroup.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modem.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonthName.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISS.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISToReport.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISToSoftversion.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISType.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISUnit.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISValueDetail.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBISValueHeader.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectofWindow.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Office.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OldOBISs.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Plain.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Post.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Province.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RegionalOffice.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="regulationRule.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SabaVEE1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SabaVEE1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SabaVEE1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SabaVEE1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SabaVEE1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="SeparateYearAndMonthFromDate.cs" />
     <Compile Include="Shamsi_to_Miladi_convertorDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowALLCardsTOMeters_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllCreditTokenWithNecessary_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAreas_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowButtonAccess_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCardTOMeter_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCatchments_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowChangeDB_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCities_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedactiveenergypivot_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedActiveEnergy_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedatariffctiveenergypivot_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedWater207_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedwaterColumnHeader207_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedwaterDetail207_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedWaterForVee_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedWaterPivot_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowConsumedWater_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCountries_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCredit303_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCurve_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCustomerReport_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCustomers_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDangelInfo_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDataBasesInfo_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDeviceModelandSoftversion_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDeviceModel_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDeviceType_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowDiatinctOBISs_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowEOffice_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="showErrorControlReportNew_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="showErrorControlReport_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowESubOffice_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="showFilterforNominalDemandReport_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowGroups_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowHashToGroup_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowLanguage_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowLocations_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowManagmentConsumedactiveenergypivot_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowManagmentConsumedWaterPivot_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMessageText_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMeterToCustomer_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMeterToGroup_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMeter_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowModem_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowNegativeCredit_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowNominalDemandViolation_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISsDesc_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISs_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISToExcel_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISToReport_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISTypeToReport_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISType_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISUnits_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISValueDetail_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOBISValueHeader_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowOffice_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowPlains_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowProvinces_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowReportOBISValueDetails_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowReports_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowSoftversionToDeviceModel_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowSubOffice_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowToken_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowTranslateofLable_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowTranslateofMessage_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowUsers_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowUserToGroup_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowVEEConsumedWaterForVEE_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowVEEValue_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShowWindows_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SoftversionToDeviceModel.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SourceType.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SplitStringList_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StatusOBISsDesc.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubOffice.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempMeter1.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempSaba.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Token.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TokenFromDangle.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Translate.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitGroup.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserToGroup.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Window.cs">
+      <DependentUpon>SabaVEE1.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <EntityDeploy Include="SabaVEE1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SabaVEE1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="SabaVEE1.edmx.diagram">
+      <DependentUpon>SabaVEE1.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SabaVEE1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SabaVEE1.edmx</DependentUpon>
+      <LastGenOutput>SabaVEE1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SabaVEE1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SabaVEE1.edmx</DependentUpon>
+      <LastGenOutput>SabaVEE1.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
