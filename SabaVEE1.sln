@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabaVEE1", "SabaVEE1\SabaVEE1.csproj", "{1598C9F6-041E-4899-AD92-3DFE701001AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabaVEE2", "SabaVEE2\SabaVEE2.csproj", "{B601D30D-395B-4B49-B769-EDBDD08397D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "CommonDataModel\Common.csproj", "{AB2C3731-C292-43B5-8D8A-19A1732E4658}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1598C9F6-041E-4899-AD92-3DFE701001AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1598C9F6-041E-4899-AD92-3DFE701001AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1598C9F6-041E-4899-AD92-3DFE701001AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B601D30D-395B-4B49-B769-EDBDD08397D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B601D30D-395B-4B49-B769-EDBDD08397D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B601D30D-395B-4B49-B769-EDBDD08397D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B601D30D-395B-4B49-B769-EDBDD08397D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2C3731-C292-43B5-8D8A-19A1732E4658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2C3731-C292-43B5-8D8A-19A1732E4658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2C3731-C292-43B5-8D8A-19A1732E4658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2C3731-C292-43B5-8D8A-19A1732E4658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

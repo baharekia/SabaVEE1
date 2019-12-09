@@ -108,6 +108,7 @@
     <Compile Include="Country.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewListWithDataModel.cs" />
     <Compile Include="CreateTokenByDongle.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -132,6 +133,8 @@
     <Compile Include="DeviceType.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntryPontForOperationHoursataAnalysis.cs" />
+    <Compile Include="EntryPontForWaterDataAnalysis.cs" />
     <Compile Include="EOffice.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -158,9 +161,7 @@
     </Compile>
     <Compile Include="InsertToExcellFileForOperationHours.cs" />
     <Compile Include="CreateFinalList.cs" />
-    <Compile Include="CreateNewListWithDataModel.cs" />
     <Compile Include="CreateTempTime.cs" />
-    <Compile Include="GetReadOutDataFromSqlServer.cs" />
     <Compile Include="InsertToExcellFileForWaterConsumption.cs" />
     <Compile Include="Language.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
@@ -225,13 +226,13 @@
     <Compile Include="OldOBISs.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="OperationHoursDataAnalysis.cs" />
     <Compile Include="Plain.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
     <Compile Include="Post.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
-    <Compile Include="PreAnalysisDataModel.cs" />
     <Compile Include="Province.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -260,7 +261,6 @@
       <DependentUpon>SabaVEE1.edmx</DependentUpon>
     </Compile>
     <Compile Include="SeparateYearAndMonthFromDate.cs" />
-    <Compile Include="Shamsi_to_Miladi_convertorDate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowALLCardsTOMeters_Result.cs">
@@ -521,6 +521,7 @@
     <Compile Include="UserToGroup.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="WaterConsumptionDataAnalysis.cs" />
     <Compile Include="Window.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -551,6 +552,12 @@
       <DependentUpon>SabaVEE1.edmx</DependentUpon>
       <LastGenOutput>SabaVEE1.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonDataModel\Common.csproj">
+      <Project>{ab2c3731-c292-43b5-8d8a-19a1732e4658}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

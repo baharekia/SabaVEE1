@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SabaVEE1
+namespace Common
 {
     public class PreAnalysisDataModel
     {

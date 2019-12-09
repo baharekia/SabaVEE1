@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SabaVEE1
+namespace SabaVEE2
 {
     public class GetReadOutDataFromSqlServer
     {
@@ -20,7 +21,7 @@ namespace SabaVEE1
 
         public List<PreAnalysisDataModel> GetReadOutDataFromSqlServerMethod(string MeterNumber)
         {
-            SabaCandHEntities2 context = new SabaCandHEntities2();
+            SabaCandHEntities context = new SabaCandHEntities();
 
             var ss = context.Meters.
                 Join(context.OBISValueHeaders, a => a.MeterID, b => b.MeterID,
