@@ -231,6 +231,7 @@
     <Compile Include="Post.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PreAnalysisDataModel.cs" />
     <Compile Include="Province.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>

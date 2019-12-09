@@ -15,11 +15,11 @@ namespace SabaVEE1
         DateTime lastReadOutDate = new DateTime();
         List<AnalysisDataModel> FinalReadOutList = new List<AnalysisDataModel>();
 
-        public List<AnalysisDataModel>  CreateNewListWithDataModelMethod(List<object> ReadOutList)
+        public List<AnalysisDataModel>  CreateNewListWithDataModelMethod(List<PreAnalysisDataModel> ReadOutList)
         {
-            foreach (object[] element in ReadOutList)
+            foreach (PreAnalysisDataModel element in ReadOutList)
             {
-                if (element[0] != null)
+                if (element.ReadOutDate != null)
                 {
                     DateTime convertedDate = shamsiDate.DateConvertor(element);
                     AnalysisDataModel analysisData = new AnalysisDataModel();
@@ -28,12 +28,11 @@ namespace SabaVEE1
 
                     if (tempTime1 == temptime2 && lastReadOutDate == convertedDate)
                     {
-                        element[0] = convertedDate;
-                        analysisData = new AnalysisDataModel((DateTime)element[0],
-                            element[1].ToString(),
-                            element[2].ToString(),
-                            element[3].ToString(),
-                            element[4].ToString(),
+                        analysisData = new AnalysisDataModel(convertedDate,
+                            element.TransferDate.ToString(),
+                            element.Obis.ToString(),
+                            element.Value.ToString(),
+                            element.ObisFarciDesc.ToString(),
                             "");
                         FinalReadOutList.Add(analysisData);
                     }
@@ -41,12 +40,11 @@ namespace SabaVEE1
                     if (temptime2 != tempTime1)
                     {
                         temptime2 = tempTime1;
-                        element[0] = convertedDate;
-                        analysisData = new AnalysisDataModel((DateTime)element[0],
-                            element[1].ToString(),
-                            element[2].ToString(),
-                            element[3].ToString(),
-                            element[4].ToString(),
+                        analysisData = new AnalysisDataModel(convertedDate,
+                            element.TransferDate.ToString(),
+                            element.Obis.ToString(),
+                            element.Value.ToString(),
+                            element.ObisFarciDesc.ToString(),
                             "");
                         FinalReadOutList.Add(analysisData);
                         lastReadOutDate = convertedDate;

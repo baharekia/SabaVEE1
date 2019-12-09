@@ -11,11 +11,11 @@ namespace SabaVEE1
     {
         PersianCalendar pc = new PersianCalendar();
 
-        public DateTime DateConvertor(object[] element )
+        public DateTime DateConvertor(PreAnalysisDataModel element )
         {
             char[] separator = { '/', '/', ' ' };
 
-            var rd = element[0].ToString();
+            var rd = element.ReadOutDate;
             String[] strlist = rd.Split(separator, 4);
 
             var year = Int32.Parse(strlist[0]);

@@ -19,7 +19,7 @@ namespace SabaVEE1
         {
             #region Total Water Consumption 
             string MeterNumber = "";
-            List<object> ReadOutList = new List<object>();
+            List<PreAnalysisDataModel> ReadOutList = new List<PreAnalysisDataModel>();
             List<AnalysisDataModel> FinalReadOutList = new List<AnalysisDataModel>();
             List<AnalysisDataModel> FinalOrderedReadOutList = new List<AnalysisDataModel>();
             List<AnalysisDataModel> ReadOutListNew = new List<AnalysisDataModel>();
@@ -42,7 +42,7 @@ namespace SabaVEE1
             #endregion
 
             #region Total Operation Hours
-            List<object> ReadOutListt = new List<object>();
+            List<PreAnalysisDataModel> ReadOutListt = new List<PreAnalysisDataModel>();
             List<AnalysisDataModel> FinalReadOutListt = new List<AnalysisDataModel>();
             List<AnalysisDataModel> FinalOrderedReadOutListt = new List<AnalysisDataModel>();
             List<AnalysisDataModel> ReadOutListNeww = new List<AnalysisDataModel>();
