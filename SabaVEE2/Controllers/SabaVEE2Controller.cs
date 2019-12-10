@@ -11,32 +11,19 @@ namespace SabaVEE2.Controllers
 {
     public class SabaVEE2Controller : ApiController
     {
-        [Route("GetMeterNumberForWaterConsumption/{MeterNumber}")]
-        public IHttpActionResult GetMeterNumberForWaterConsumption(string MeterNumber)
+        [Route("GetMeterNumber/{MeterNumber}")]
+        public List<FinalPresentationDataModel> GetMeterNumberForWaterConsumption(string MeterNumber)
         {
             List<PreAnalysisDataModel> ReadOutList = new List<PreAnalysisDataModel>();
+            List<FinalPresentationDataModel> FinalReturnedList = new List<FinalPresentationDataModel>();
 
             GetReadOutDataFromSqlServer getReadOutDataFromSqlServer = new GetReadOutDataFromSqlServer();
             ReadOutList = getReadOutDataFromSqlServer.GetReadOutDataFromSqlServerMethod(MeterNumber);
 
-            EntryPontForWaterDataAnalysis entryPontForWaterDataAnalysis = new EntryPontForWaterDataAnalysis();
-            entryPontForWaterDataAnalysis.EntryPontForWaterDataAnalysisMethod(ReadOutList);
+            EntryPonitForDataAnalysis entryPontForWaterDataAnalysis = new EntryPonitForDataAnalysis();
+            FinalReturnedList =  entryPontForWaterDataAnalysis.EntryPonitForDataAnalysisMethod(ReadOutList);
 
-            return Ok("Total Water Consumption Data Analysis Calculated");
-        }
-
-        [Route("GetMeterNumberForOperationHours/{MeterNumber}")]
-        public IHttpActionResult GetMeterNumberForOperationHours(string MeterNumber)
-        {
-            List<PreAnalysisDataModel> ReadOutList = new List<PreAnalysisDataModel>();
-
-            GetReadOutDataFromSqlServer getReadOutDataFromSqlServerr = new GetReadOutDataFromSqlServer();
-            ReadOutList = getReadOutDataFromSqlServerr.GetReadOutDataFromSqlServerMethod(MeterNumber);
-
-            EntryPontForOperationHoursataAnalysis entryPontForOperationHoursataAnalysis = new EntryPontForOperationHoursataAnalysis();
-            entryPontForOperationHoursataAnalysis.EntryPontForOperationHoursataAnalysisMethod(ReadOutList);
-
-            return Ok("Total Operation Hoirs Data Analysis Calculated");
+            return FinalReturnedList;
         }
     }
 }

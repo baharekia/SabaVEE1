@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1598C9F6-041E-4899-AD92-3DFE701001AE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SabaVEE1</RootNamespace>
     <AssemblyName>SabaVEE1</AssemblyName>
@@ -34,6 +34,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -108,6 +111,7 @@
     <Compile Include="Country.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="CreateFinalNewList.cs" />
     <Compile Include="CreateNewListWithDataModel.cs" />
     <Compile Include="CreateTokenByDongle.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
@@ -133,8 +137,7 @@
     <Compile Include="DeviceType.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntryPontForOperationHoursataAnalysis.cs" />
-    <Compile Include="EntryPontForWaterDataAnalysis.cs" />
+    <Compile Include="EntryPonitForDataAnalysis.cs" />
     <Compile Include="EOffice.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -144,6 +147,7 @@
     <Compile Include="ESubOffice.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
+    <Compile Include="FinalPresentationDataModel.cs" />
     <Compile Include="FixedOBI.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -226,7 +230,6 @@
     <Compile Include="OldOBISs.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OperationHoursDataAnalysis.cs" />
     <Compile Include="Plain.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
@@ -521,7 +524,7 @@
     <Compile Include="UserToGroup.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
-    <Compile Include="WaterConsumptionDataAnalysis.cs" />
+    <Compile Include="WaterConsumptionAmdOperationHoursDataAnalysis.cs" />
     <Compile Include="Window.cs">
       <DependentUpon>SabaVEE1.tt</DependentUpon>
     </Compile>
