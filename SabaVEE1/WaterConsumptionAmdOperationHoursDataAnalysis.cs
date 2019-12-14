@@ -19,7 +19,7 @@ namespace SabaVEE1
             List<FinalPresentationDataModel> returdedFinalList = new List<FinalPresentationDataModel>();
 
             CreateNewListWithDataModel createNewListWithDataModel = new CreateNewListWithDataModel();
-            FinalReadOutList = createNewListWithDataModel.CreateNewListWithDataModelMethod(ReadOutList);
+          FinalReadOutList = createNewListWithDataModel.CreateNewListWithDataModelMethod(ReadOutList);
 
             AddModifiedDateColumnToReadOutListForWaterConsumption addModifiedDateColumnToReadOutListForWaterConsumption = new AddModifiedDateColumnToReadOutListForWaterConsumption();
             WaterFinalOrderedReadOutList = addModifiedDateColumnToReadOutListForWaterConsumption.AddModifiedDateColumnToReadOutListMethod(FinalReadOutList);

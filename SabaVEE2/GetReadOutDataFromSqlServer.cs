@@ -43,7 +43,7 @@ namespace SabaVEE2
                     Value = f.e.d.Value
                 }).Distinct().OrderBy(x=>x.ReadOutDate).ThenBy(x=> x.Obis).ToList();
 
-            return ss;
+        return ss;
 
 
             //var ReadOutList = (from meter in context.Meters
